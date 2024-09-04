@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scripts Output in Tabs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .tab-container { overflow: hidden; border: 1px solid #ddd; }
+        .tab { float: left; padding: 10px 20px; cursor: pointer; border: 1px solid #ddd; }
+        .tab-content { display: none; padding: 20px; border-top: 1px solid #ddd; }
+        .active-tab { background-color: #f1f1f1; }
+        .show { display: block; }
+    </style>
+    <script>
+        function openTab(event, tabId) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName('tab-content');
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = 'none';
+            }
+            tablinks = document.getElementsByClassName('tab');
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(' active-tab', '');
+            }
+            document.getElementById(tabId).style.display = 'block';
+            event.currentTarget.className += ' active-tab';
+        }
+    </script>
+</head>
+<body>
+    <h1>Scripts Output in Tabs</h1>
+    <div class="tab-container">
+        <div class="tab" onclick="openTab(event, 'content0')">generatehtml</div>
+        <div class="tab" onclick="openTab(event, 'content1')">mtabsHTML</div>
+    </div>
+    <div id="content0" class="tab-content">
+        <pre>
+
+        </pre>
+    </div>
+    <div id="content1" class="tab-content">
+        <pre>
+HTML file generated at /home/HTML_GITHUB/mtabsoutput.html
+        </pre>
+    </div>
+</body>
+</html>
