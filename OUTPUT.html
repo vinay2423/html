@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Content</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .line { margin: 0; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>File Content</h1>
+    <p class="line">#!/bin/bash</p>
+    <p class="line"></p>
+    <p class="line"># Paths to the input text file and the output HTML file</p>
+    <p class="line">INPUT_FILE="path/to/your/textfile.txt"</p>
+    <p class="line">OUTPUT_FILE="path/to/output.html"</p>
+    <p class="line"></p>
+    <p class="line"># Check if the input file exists</p>
+    <p class="line">if [ ! -f "$INPUT_FILE" ]; then</p>
+    <p class="line">  echo "Input file not found!" >&2</p>
+    <p class="line">  exit 1</p>
+    <p class="line">fi</p>
+    <p class="line"></p>
+    <p class="line"># Start the HTML content</p>
+    <p class="line">{</p>
+    <p class="line">  echo "<!DOCTYPE html>"</p>
+    <p class="line">  echo "<html lang=\"en\">"</p>
+    <p class="line">  echo "<head>"</p>
+    <p class="line">  echo "    <meta charset=\"UTF-8\">"</p>
+    <p class="line">  echo "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"</p>
+    <p class="line">  echo "    <title>File Content</title>"</p>
+    <p class="line">  echo "    <style>"</p>
+    <p class="line">  echo "        body { font-family: Arial, sans-serif; }"</p>
+    <p class="line">  echo "        .line { margin: 0; padding: 5px; }"</p>
+    <p class="line">  echo "    </style>"</p>
+    <p class="line">  echo "</head>"</p>
+    <p class="line">  echo "<body>"</p>
+    <p class="line">  echo "    <h1>File Content</h1>"</p>
+    <p class="line"></p>
+    <p class="line">  # Read each line of the input file and wrap it in <p> tags</p>
+    <p class="line">  while IFS= read -r line; do</p>
+    <p class="line">    echo "    <p class=\"line\">${line}</p>"</p>
+    <p class="line">  done < "$INPUT_FILE"</p>
+    <p class="line"></p>
+    <p class="line">  # Finish the HTML content</p>
+    <p class="line">  echo "</body>"</p>
+    <p class="line">  echo "</html>"</p>
+    <p class="line">} > "$OUTPUT_FILE"</p>
+    <p class="line"></p>
+    <p class="line">echo "HTML file generated at $OUTPUT_FILE"</p>
+    <p class="line"></p>
+</body>
+</html>
