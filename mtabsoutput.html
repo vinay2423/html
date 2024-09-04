@@ -161,6 +161,36 @@ echo "HTML file generated at $OUTPUT_FILE"
     </div>
     <div id="content2" class="tab-content">
         <pre>
+/your-project-directory
+    ├── generate-tabs-html.sh
+    ├── firstfile.txt
+    ├── secondfile.txt
+    └── thirdfile.txt
+    └── output.html
+
+
+# Loop through each file again to generate content for each tab
+  index=0
+  for file in "${INPUT_FILES[@]}"; do
+    filename=$(basename "$file" .txt)
+    echo "    <div id=\"content${index}\" class=\"tab-content\">"
+    echo "        <pre>"
+
+    # Append the content of each file
+    while IFS= read -r line; do
+      echo "${line}"
+    done < "$file"
+
+    echo "        </pre>"
+    echo "    </div>"
+    index=$((index + 1))
+  done
+
+  echo "</body>"
+  echo "</html>"
+} > "$OUTPUT_FILE"
+
+echo "HTML file generated at $OUTPUT_FILE"
         </pre>
     </div>
 </body>
