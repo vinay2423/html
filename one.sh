@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Array of input text files
-INPUT_FILES=("/home/HTML_GITHUB/cd03.txt" "/home/HTML_GITHUB/cd04.txt" "/home/HTML_GITHUB/cd05.txt")
-OUTPUT_FILE="/home/HTML_GITHUB/mtabsoutput.html"
+# Array of scripts
+SCRIPTS=("/home/HTML_GITHUB/generatehtml.sh/" "/home/HTML_GITHUB/mtabsHTML.sh" )
+OUTPUT_FILE="/home/HTML_GITHUB/one.html"
 
 # Start the HTML content
 {
@@ -11,7 +11,7 @@ OUTPUT_FILE="/home/HTML_GITHUB/mtabsoutput.html"
   echo "<head>"
   echo "    <meta charset=\"UTF-8\">"
   echo "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-  echo "    <title>File Contents in Tabs</title>"
+  echo "    <title>Scripts Output in Tabs</title>"
   echo "    <style>"
   echo "        body { font-family: Arial, sans-serif; margin: 20px; }"
   echo "        .tab-container { overflow: hidden; border: 1px solid #ddd; }"
@@ -38,30 +38,31 @@ OUTPUT_FILE="/home/HTML_GITHUB/mtabsoutput.html"
   echo "</head>"
   echo "<body>"
 
-  echo "    <h1>File Contents in Tabs</h1>"
+  echo "    <h1>Scripts Output in Tabs</h1>"
   echo "    <div class=\"tab-container\">"
 
-  # Loop through each file to create tabs and their content
+  # Loop through each script to create tabs
   index=0
-  for file in "${INPUT_FILES[@]}"; do
-    filename=$(basename "$file" .txt)
-    echo "        <div class=\"tab\" onclick=\"openTab(event, 'content${index}')\">$filename</div>"
+  for script in "${SCRIPTS[@]}"; do
+    script_name=$(basename "$script" .sh)
+    echo "        <div class=\"tab\" onclick=\"openTab(event, 'content${index}')\">$script_name</div>"
     index=$((index + 1))
   done
 
   echo "    </div>"
 
-  # Loop through each file again to generate content for each tab
+  # Loop through each script again to generate content for each tab
   index=0
-  for file in "${INPUT_FILES[@]}"; do
-    filename=$(basename "$file" .txt)
+  for script in "${SCRIPTS[@]}"; do
+    script_name=$(basename "$script" .sh)
     echo "    <div id=\"content${index}\" class=\"tab-content\">"
     echo "        <pre>"
 
-    # Append the content of each file
-    while IFS= read -r line; do
-      echo "${line}"
-    done < "$file"
+    # Capture the output of the script
+    SCRIPT_OUTPUT=$("$script")
+
+    # Output the script's content within <pre> tags for formatting
+    echo "$SCRIPT_OUTPUT"
 
     echo "        </pre>"
     echo "    </div>"

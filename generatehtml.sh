@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Paths to the input text file and the output HTML file
-INPUT_FILE="/home/HTML/cd03.txt"
-OUTPUT_FILE="/home/HTML/OUTPUT.html"
+INPUT_FILE="/home/HTML_GITHUB/cd03.txt"
+OUTPUT_FILE="/home/HTML_GITHUB/OUTPUT.html"
 
 # Check if the input file exists
 if [ ! -f "$INPUT_FILE" ]; then

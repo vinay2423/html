@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cd04 - File Content</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .line { margin: 0; padding: 5px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>cd04 - File Content</h1>
+    <p class="line">#!/bin/bash</p>
+    <p class="line"></p>
+    <p class="line"># Array of input text files</p>
+    <p class="line">INPUT_FILES=("path/to/firstfile.txt" "path/to/secondfile.txt" "path/to/thirdfile.txt")</p>
+    <p class="line">OUTPUT_FILE="path/to/output.html"</p>
+    <p class="line"></p>
+    <p class="line"># Start the HTML content</p>
+    <p class="line">{</p>
+    <p class="line">  echo "<!DOCTYPE html>"</p>
+    <p class="line">  echo "<html lang=\"en\">"</p>
+    <p class="line">  echo "<head>"</p>
+    <p class="line">  echo "    <meta charset=\"UTF-8\">"</p>
+    <p class="line">  echo "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"</p>
+    <p class="line">  echo "    <title>File Contents in Tabs</title>"</p>
+    <p class="line">  echo "    <style>"</p>
+    <p class="line">  echo "        body { font-family: Arial, sans-serif; margin: 20px; }"</p>
+    <p class="line">  echo "        .tab-container { overflow: hidden; border: 1px solid #ddd; }"</p>
+    <p class="line">  echo "        .tab { float: left; padding: 10px 20px; cursor: pointer; border: 1px solid #ddd; }"</p>
+    <p class="line">  echo "        .tab-content { display: none; padding: 20px; border-top: 1px solid #ddd; }"</p>
+    <p class="line">  echo "        .active-tab { background-color: #f1f1f1; }"</p>
+    <p class="line">  echo "        .show { display: block; }"</p>
+    <p class="line">  echo "    </style>"</p>
+    <p class="line">  echo "    <script>"</p>
+    <p class="line">  echo "        function openTab(event, tabId) {"</p>
+    <p class="line">  echo "            var i, tabcontent, tablinks;"</p>
+    <p class="line">  echo "            tabcontent = document.getElementsByClassName('tab-content');"</p>
+    <p class="line">  echo "            for (i = 0; i < tabcontent.length; i++) {"</p>
+    <p class="line">  echo "                tabcontent[i].style.display = 'none';"</p>
+    <p class="line">  echo "            }"</p>
+    <p class="line">  echo "            tablinks = document.getElementsByClassName('tab');"</p>
+    <p class="line">  echo "            for (i = 0; i < tablinks.length; i++) {"</p>
+    <p class="line">  echo "                tablinks[i].className = tablinks[i].className.replace(' active-tab', '');"</p>
+    <p class="line">  echo "            }"</p>
+    <p class="line">  echo "            document.getElementById(tabId).style.display = 'block';"</p>
+    <p class="line">  echo "            event.currentTarget.className += ' active-tab';"</p>
+    <p class="line">  echo "        }"</p>
+    <p class="line">  echo "    </script>"</p>
+    <p class="line">  echo "</head>"</p>
+    <p class="line">  echo "<body>"</p>
+    <p class="line"></p>
+    <p class="line">  echo "    <h1>File Contents in Tabs</h1>"</p>
+    <p class="line">  echo "    <div class=\"tab-container\">"</p>
+    <p class="line"></p>
+    <p class="line">  # Loop through each file to create tabs and their content</p>
+    <p class="line">  index=0</p>
+    <p class="line">  for file in "${INPUT_FILES[@]}"; do</p>
+    <p class="line">    filename=$(basename "$file" .txt)</p>
+    <p class="line">    echo "        <div class=\"tab\" onclick=\"openTab(event, 'content${index}')\">$filename</div>"</p>
+    <p class="line">    index=$((index + 1))</p>
+    <p class="line">  done</p>
+    <p class="line"></p>
+    <p class="line">  echo "    </div>"</p>
+    <p class="line"></p>
+    <p class="line">  # Loop through each file again to generate content for each tab</p>
+    <p class="line">  index=0</p>
+    <p class="line">  for file in "${INPUT_FILES[@]}"; do</p>
+    <p class="line">    filename=$(basename "$file" .txt)</p>
+    <p class="line">    echo "    <div id=\"content${index}\" class=\"tab-content\">"</p>
+    <p class="line">    echo "        <pre>"</p>
+    <p class="line"></p>
+    <p class="line">    # Append the content of each file</p>
+    <p class="line">    while IFS= read -r line; do</p>
+    <p class="line">      echo "${line}"</p>
+    <p class="line">    done < "$file"</p>
+    <p class="line"></p>
+    <p class="line">    echo "        </pre>"</p>
+    <p class="line">    echo "    </div>"</p>
+    <p class="line">    index=$((index + 1))</p>
+    <p class="line">  done</p>
+    <p class="line"></p>
+    <p class="line">  echo "</body>"</p>
+    <p class="line">  echo "</html>"</p>
+    <p class="line">} > "$OUTPUT_FILE"</p>
+    <p class="line"></p>
+    <p class="line">echo "HTML file generated at $OUTPUT_FILE"</p>
+    <p class="line"></p>
+</body>
+</html>

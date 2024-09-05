@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cd05 - File Content</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .line { margin: 0; padding: 5px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>cd05 - File Content</h1>
+    <p class="line">/your-project-directory</p>
+    <p class="line">    ├── generate-tabs-html.sh</p>
+    <p class="line">    ├── firstfile.txt</p>
+    <p class="line">    ├── secondfile.txt</p>
+    <p class="line">    └── thirdfile.txt</p>
+    <p class="line">    └── output.html</p>
+    <p class="line"></p>
+    <p class="line"></p>
+    <p class="line"># Loop through each file again to generate content for each tab</p>
+    <p class="line">  index=0</p>
+    <p class="line">  for file in "${INPUT_FILES[@]}"; do</p>
+    <p class="line">    filename=$(basename "$file" .txt)</p>
+    <p class="line">    echo "    <div id=\"content${index}\" class=\"tab-content\">"</p>
+    <p class="line">    echo "        <pre>"</p>
+    <p class="line"></p>
+    <p class="line">    # Append the content of each file</p>
+    <p class="line">    while IFS= read -r line; do</p>
+    <p class="line">      echo "${line}"</p>
+    <p class="line">    done < "$file"</p>
+    <p class="line"></p>
+    <p class="line">    echo "        </pre>"</p>
+    <p class="line">    echo "    </div>"</p>
+    <p class="line">    index=$((index + 1))</p>
+    <p class="line">  done</p>
+    <p class="line"></p>
+    <p class="line">  echo "</body>"</p>
+    <p class="line">  echo "</html>"</p>
+    <p class="line">} > "$OUTPUT_FILE"</p>
+    <p class="line"></p>
+    <p class="line">echo "HTML file generated at $OUTPUT_FILE"</p>
+</body>
+</html>
